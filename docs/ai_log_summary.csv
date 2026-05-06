@@ -1,0 +1,2 @@
+Student_Name,Session_Type,Topic,Prompt_or_Category,Description,Outcome,Notes
+Alexander Zepeda,Tutoring,Design verification,1B,Asked to verify our design is correct.,Verified: The hardware design and software architecture are correct. Pin muxing and I2C addresses are valid for the TM4C123 platform.,The modular software structure ensures scalability for the app logic.
