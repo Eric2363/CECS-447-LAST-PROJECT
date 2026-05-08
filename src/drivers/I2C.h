@@ -28,14 +28,14 @@
 #define I2C_SCL_PIN			(0x40) //Pin 6
 #define EN_I2C_MASTER		(0x10) //Enable I2C Master Functionality
 #define I2C_MTPR_TPR_VALUE	(7) //Value to set for Master Timer Period Register for 100kHz I2C Speed
-#define I2C_MTPR_STD_SPEED (CONSTANT_FILL)
+#define I2C_MTPR_STD_SPEED	(100000U)
 
 
 //Transmit Function (Most came from above Macros)
-#define I2C0_RW_PIN				(CONSTANT_FILL)
+#define I2C0_RW_PIN				(I2C_SDA_PIN)
 
 //Burst Transmit Function
-#define RUN_CMD						(CONSTANT_FILL)
+#define RUN_CMD						(I2C_MCS_RUN)
 
 /*
  *	-------------------I2C0_Init------------------
@@ -79,6 +79,7 @@ void I2C_Burst_Receive(uint8_t slave_addr, uint8_t slave_reg_addr, uint8_t* data
  *	Output: None
  */
 uint8_t I2C_Burst_Transmit(uint8_t slave_addr, uint8_t slave_reg_addr, uint8_t* data, uint32_t size);
+uint8_t I2C_Burst_Transmit_NoReg(uint8_t slave_addr, uint8_t* data, uint32_t size);
 
 #endif //I2C_H_
 
