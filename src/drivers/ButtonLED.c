@@ -26,7 +26,7 @@ void LED_Init(void){
 	GPIO_PORTF_AMSEL_R &=~ LEDS; //Disable analog function for LED pins
 	GPIO_PORTF_AFSEL_R &=~ LEDS; //Disable alternate function for LED pins
 	
-	GPIO_PORTF_DATA_R = 0x00;
+	//GPIO_PORTF_DATA_R = 0x00;
 	
 }
 
@@ -60,32 +60,5 @@ void BTN_Init(void){
 	NVIC_EN0_R |= 0x40000000; //Enable interrupt for PortF
 }
 
-//Interrupt Handler for PortF
-void GPIOPortF_Handler(void){
-	GPIO_PORTF_ICR_R = SWITCHES; //Clear interrupt flags for switch pins
-	
-	// Handle the interrupt event here
-	if((GPIO_PORTF_DATA_R & SW1) == 0){ //Check if SW1 is pressed
-		//shift right to toggle leds
-		ledState = (ledState +1) %3;
-	}
-	else if((GPIO_PORTF_DATA_R & SW2) == 0){ //Check if SW2 is pressed
-		ledState = (ledState +2) %3;
-	}
-	
-	//update led color
-		if(ledState == 0){
-			GPIO_PORTF_DATA_R &= ~(RED | BLUE | GREEN); // clear first
-        GPIO_PORTF_DATA_R |= RED;
-    }
-    else if(ledState == 1){
-			GPIO_PORTF_DATA_R &= ~(RED | BLUE | GREEN); // clear first
-        GPIO_PORTF_DATA_R |= BLUE;
-    }
-    else if(ledState == 2){
-			GPIO_PORTF_DATA_R &= ~(RED | BLUE | GREEN); // clear first
-        GPIO_PORTF_DATA_R |= GREEN;
-    }
-		
-}
+
 

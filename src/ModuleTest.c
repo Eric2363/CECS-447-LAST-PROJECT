@@ -31,7 +31,7 @@
 //// Example:
 ////#define MODULE_1_TEST
 ////#define MODULE_3_TEST
-////#define MODULE_6_TEST
+//#define MODULE_6_TEST
 
 //// functions prototypes
 //void System_Init(void);

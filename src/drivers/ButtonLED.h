@@ -10,8 +10,7 @@
  *
  */
  #include "../tm4c123gh6pm.h"
-#ifndef BUTTONLED_H_
-#define BUTTONLED_H_
+
 #define PORTF 0x20
 #define LEVEL2 0x00400000
 
@@ -32,4 +31,5 @@
 void LED_Init(void);
 void BTN_Init(void);
 
-#endif
+
+
