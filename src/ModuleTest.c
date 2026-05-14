@@ -5,8 +5,8 @@
 //// Module description: 
 //// A brief summary on modules tested in this module test file,
 //// including module list, responsibility and team member assignment
-//// Team #:
-//// Team members:
+// Team #4
+// Team members: Eric Santana; Dante Jimenez; Alexander Zepeda; Kour, Thaisinge
 
 
 //// Header files needed for this program

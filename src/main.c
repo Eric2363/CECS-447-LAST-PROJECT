@@ -1,10 +1,11 @@
+
 // main.c
 // Course number:
 // Term: 
-// Project number: 
+// Project number: Final Project
 // Project description:
 // Team #4
-// Team members:
+// Team members: Eric Santana; Dante Jimenez; Alexander Zepeda; Kour, Thaisinge
 
 // Header files needed for this program
 // Include C library header files, microntroller header files, and 
@@ -16,6 +17,9 @@
 #include "/drivers/I2C.h"
 #include "/drivers/MPU6050.h"
 #include "/drivers/LCD.h"
+#include "/drivers/Servo.h"
+#include "/drivers/TCS34727.h"
+
 #include "stdio.h"
 
 
@@ -28,8 +32,14 @@ void UpdateLCD(void);
 void UpdateTerminal(void);
 void UART_OutSDec(int32_t n);
 void Delay(unsigned long ms);
+void Color(void);
+void UpdateLED(void);
+
 //global
 MPU6050_ANGLE_t angle_data;
+COLOR_DETECTED currentColor;
+RGB_COLOR_HANDLE_t RGB;
+
 char xData[16];
 char yData[16];
 char zData[16];
@@ -44,7 +54,7 @@ int main(void){
 	LCD_Print_Str((uint8_t*)"System");
 	LCD_Set_Cursor(ROW2,0);
 	LCD_Print_Str((uint8_t*)"Initialized!");
-	DELAY_1MS(200);
+	DELAY_1MS(1000);
 	
 	//100ms ticks
 	uint8_t tick = 0;
@@ -54,13 +64,14 @@ int main(void){
 		
 		//Every 100ms read IMU & color
 		if(detectionFlag){
-			//TO DO
-			//ReadColor
+			//Get new color and MPU data
+			Color();
 			MPU();
 		}
 		
-		//TO DO
-		//UpdateServo
+		
+		//UpdateServo every 100ms
+		Drive_Servo((int16_t)angle_data.ArX);
 		
 		//Every 1 sec do this task
 		tick++;
@@ -69,16 +80,42 @@ int main(void){
 			tick = 0;
 			if(displayFlag){
 				UpdateLCD();
+				
 			}
 			UpdateTerminal();
+			UpdateLED();
+			
+			
+			
 		}
 		
 		DELAY_1MS(100);
+		
   }
 	
 }
 
+void Color(void){
+    // Read and normalize RGB values
+    TCS34727_GET_RGB(&RGB);
 
+    // Detect strongest color
+    currentColor = Detect_Color(&RGB);
+}
+void UpdateLED(){
+    if(currentColor == RED_DETECT){
+        GPIO_PORTF_DATA_R = RED;
+    }
+    else if(currentColor == GREEN_DETECT){
+        GPIO_PORTF_DATA_R = GREEN;
+    }
+    else if(currentColor == BLUE_DETECT){
+        GPIO_PORTF_DATA_R = BLUE;
+    }
+    else{
+        GPIO_PORTF_DATA_R = 0x00;
+    }
+}
 void MPU(){
 	//create struct instances
 	MPU6050_ACCEL_t accel_data;
@@ -100,7 +137,18 @@ void MPU(){
 
 void UpdateLCD(){
 		LCD_Clear();
-		LCD_Print_Str((uint8_t*)"COLOR:GREEN");
+		if(currentColor == RED_DETECT){
+			LCD_Print_Str((uint8_t*)"COLOR:RED");
+		}
+		else if(currentColor == GREEN_DETECT){
+			LCD_Print_Str((uint8_t*)"COLOR:GREEN");
+		}
+		else if(currentColor == BLUE_DETECT){
+			LCD_Print_Str((uint8_t*)"COLOR:BLUE");
+		}
+		else{
+			LCD_Print_Str((uint8_t*)"COLOR:INVALID");
+		}
 		LCD_Set_Cursor(ROW2,0);
 		
 		//print x on LCD
@@ -123,6 +171,17 @@ void UpdateLCD(){
 	
 }
 void UpdateTerminal(){
+	
+		//Display color
+		UART_OutString((uint8_t*)"RGB R=");
+    UART_OutSDec((int32_t)RGB.R);
+
+    UART_OutString((uint8_t*)" G=");
+    UART_OutSDec((int32_t)RGB.G);
+
+    UART_OutString((uint8_t*)" B=");
+    UART_OutSDec((int32_t)RGB.B);
+		UART_OutString((uint8_t*)" | ");
 	  // Angles (convert to integers for display)
 		UART_OutString((uint8_t*)"Angles: X =");
     UART_OutSDec((int32_t)angle_data.ArX);
@@ -133,6 +192,7 @@ void UpdateTerminal(){
     UART_OutString((uint8_t*)"\r\n");
 	
 }
+
 void System_Init(void) {
 	PLL_Init();
 	WTIMER_Init();
@@ -142,6 +202,8 @@ void System_Init(void) {
 	LCD_Init();
 	LED_Init();
 	BTN_Init();
+	Servo_Init();
+	TCS34727_Init();
 }
 
 void UART_OutSDec(int32_t n) {
