@@ -1,15 +1,6 @@
-/*
- * MPU6050.h
- *
- *	Provides functions to interact with 6-dof MPU6050
- *	accelerometer and gyroscope
- *
- *	Datasheet Link: https://cdn.sparkfun.com/datasheets/Sensors/Accelerometers/RM-MPU-6000A.pdf
- *
- * Created on: May 24th, 2023
- *		Author: Jackie Huynh
- *
- */
+// Team #4
+// Team members: Eric Santana; Dante Jimenez; Alexander Zepeda; Kour, Thaisinge
+
 #ifndef MPU6050_H_
 #define MPU6050_H_
 

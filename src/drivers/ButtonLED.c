@@ -1,10 +1,6 @@
-/*
- * ButtonLED.c
- *
- * Created on: March 1st, 2023
- *		Author: Jackie Huynh
- *
- */
+// Team #4
+// Team members: Eric Santana; Dante Jimenez; Alexander Zepeda; Kour, Thaisinge
+
  
 #include "ButtonLED.h"
 volatile int ledState = 0;

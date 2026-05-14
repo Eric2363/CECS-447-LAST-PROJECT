@@ -1,13 +1,6 @@
-/*
- * LCD.h
- *
- *	Provides LCD functions such as initialization, sending
- *	commands and data, and basic functionalities
- *
- * Created on: July 26th, 2023
- *		Author: Jackie Huynh
- *
- */
+// Team #4
+// Team members: Eric Santana; Dante Jimenez; Alexander Zepeda; Kour, Thaisinge
+
  
 #ifndef LCD_H_
 #define LCD_H_

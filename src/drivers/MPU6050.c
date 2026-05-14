@@ -1,13 +1,6 @@
-/*
- * MPU6050.c
- *
- *	Main implementation of functions to interact with
- *	the 6-dof MPU6050 Accelerometer and Gyroscope
- *
- * Created on: May 24th, 2023
- *		Author: Jackie Huynh
- *
- */
+// Team #4
+// Team members: Eric Santana; Dante Jimenez; Alexander Zepeda; Kour, Thaisinge
+
  
 #include "MPU6050.h"
 #include "I2C.h"

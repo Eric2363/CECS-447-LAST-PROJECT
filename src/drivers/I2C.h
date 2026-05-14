@@ -1,12 +1,6 @@
-/*
- * I2C.h
- *
- *	Provides the I2C Init, Read, and Write Function
- *
- * Created on: May 24th, 2023
- *		Author: Jackie Huynh
- *
- */
+// Team #4
+// Team members: Eric Santana; Dante Jimenez; Alexander Zepeda; Kour, Thaisinge
+
 
 #ifndef I2C_H_
 #define I2C_H_

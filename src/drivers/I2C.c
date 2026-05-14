@@ -1,12 +1,6 @@
-/*
- * I2C.c
- *
- *	Main implementation of the I2C Init, Read, and Write Function
- *
- * Created on: May 24th, 2023
- *		Author: Jackie Huynh
- *
- */
+// Team #4
+// Team members: Eric Santana; Dante Jimenez; Alexander Zepeda; Kour, Thaisinge
+
  
 #include "I2C.h"
 

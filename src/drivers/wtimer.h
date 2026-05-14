@@ -1,12 +1,6 @@
-/*
- * wtimer.h
- *
- *	Provides basic utility function such as delay and 
- *	value mapping
- *
+// Team #4
+// Team members: Eric Santana; Dante Jimenez; Alexander Zepeda; Kour, Thaisinge
 
- *
- */
  
 
 #include "../tm4c123gh6pm.h"

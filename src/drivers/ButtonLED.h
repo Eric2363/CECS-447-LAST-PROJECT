@@ -1,14 +1,6 @@
-/*
- * ButtonLED.h
- *
- *	Provides function to initialize the onboard RGB LED and
- *	buttons on the TIVA TM4C as well as macros for the different
- *	possible color combination 
- *
- * Created on: March 1st, 2023
- *		Author: Jackie Huynh
- *
- */
+// Team #4
+// Team members: Eric Santana; Dante Jimenez; Alexander Zepeda; Kour, Thaisinge
+
  #include "../tm4c123gh6pm.h"
 
 #define PORTF 0x20
